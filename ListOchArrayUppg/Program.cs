@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace ListOchArrayUppg
+﻿namespace ListOchArrayUppg
 {
     internal class Program
     {
@@ -56,6 +54,21 @@ namespace ListOchArrayUppg
             Console.WriteLine("Före: " + string.Join(",", rotateTestData));
             string[] rotateTestDataResult = Rotate(rotateTestData, 2);
             Console.WriteLine("Efter: " + string.Join(",", rotateTestDataResult));
+            Console.WriteLine();
+
+            // RotateInPlace
+            Console.WriteLine("Demonstration av RotateInPlace:");
+            Console.WriteLine("Före: " + string.Join(",", rotateTestData));
+            RotateInPlace(rotateTestData, 2);
+            Console.WriteLine("Efter: " + string.Join(",", rotateTestData));
+            Console.WriteLine();
+
+            // BubbleSort
+            int[] bubbleSortTestData = { 8, 3, 4, 7, 1, 4, 6, 3 };
+            Console.WriteLine("Demonstration av BubbleSort:");
+            Console.WriteLine("Före: " + string.Join(",", bubbleSortTestData));
+            BubbleSort(bubbleSortTestData);
+            Console.WriteLine("Efter: " + string.Join(",", bubbleSortTestData));
             Console.WriteLine();
 
         }
@@ -136,5 +149,42 @@ namespace ListOchArrayUppg
             return result;
         }
 
+        public static void RotateOneStep(string[] strings)
+        {
+            string last = strings[strings.Length - 1];
+
+            for (int i = strings.Length - 1; i > 0 ; i--)
+            {
+                strings[i] = strings[i - 1];
+            }
+
+            strings[0] = last;
+        }
+
+        public static void RotateInPlace(string[] strings, int n)
+        {
+            for (int i = 0; i < n; i++)
+            {
+                RotateOneStep(strings);
+            }
+        }
+
+        public static void BubbleSort(int[] numbers)
+        {
+            bool updateAgain = true;
+
+            while (updateAgain)
+            {
+                updateAgain = false;
+                for (int i = 0; i < numbers.Length - 1; i++)
+                {
+                    if (numbers[i] > numbers[i + 1])
+                    {
+                        Swap(i, i + 1, numbers);
+                        updateAgain = true;
+                    }
+                }
+            }
+        }
     }
 }
