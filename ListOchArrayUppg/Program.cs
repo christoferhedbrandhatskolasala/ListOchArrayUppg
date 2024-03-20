@@ -40,7 +40,23 @@ namespace ListOchArrayUppg
             Console.WriteLine("Demonstration av Concatenate:");
             string[] concatResult = Concatenate(testPart1, testPart2);
             Console.WriteLine("Sammansatt array: " + string.Join(",", concatResult));
+            Console.WriteLine();
 
+            // Reverse
+            int[] reverseTestData = { 1, 2, 3, 4, 5, 6, 7 };
+            Console.WriteLine("Demonstration av Reverse:");
+            Console.WriteLine("Före: " + string.Join(",", reverseTestData));
+            Reverse(reverseTestData);
+            Console.WriteLine("Efter: " + string.Join(",", reverseTestData));
+            Console.WriteLine();
+
+            // Rotate
+            string[] rotateTestData = { "a", "b", "c", "d", "e" };
+            Console.WriteLine("Demonstration av Rotate:");
+            Console.WriteLine("Före: " + string.Join(",", rotateTestData));
+            string[] rotateTestDataResult = Rotate(rotateTestData, 2);
+            Console.WriteLine("Efter: " + string.Join(",", rotateTestDataResult));
+            Console.WriteLine();
 
         }
 
@@ -99,5 +115,26 @@ namespace ListOchArrayUppg
 
             return result;
         }
+
+        public static void Reverse(int[] numbers)
+        {
+            for (int i = 0; i < numbers.Length / 2; i++)
+            {
+                Swap(i, numbers.Length - 1 - i, numbers);
+            }
+        }
+
+        public static string[] Rotate(string[] strings, int n)
+        {
+            string[] result = new string[strings.Length];
+
+            for (int i = 0; i < strings.Length; i++)
+            {
+                result[(i + n) % strings.Length] = strings[i];
+            }
+
+            return result;
+        }
+
     }
 }
