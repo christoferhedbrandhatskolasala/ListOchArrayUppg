@@ -71,6 +71,23 @@
             Console.WriteLine("Efter: " + string.Join(",", bubbleSortTestData));
             Console.WriteLine();
 
+            // Intersection
+            string[] intersectionSet1 = { "a", "b", "c", "d", "e" };
+            string[] intersectionSet2 = { "h", "d", "w", "s", "a" };
+            Console.WriteLine("Demonstration av Intersection:");
+            Console.WriteLine("Set 1: " + string.Join(",", intersectionSet1));
+            Console.WriteLine("Set 2: " + string.Join(",", intersectionSet2));
+            List<string> intersectionResult = Intersection(intersectionSet1, intersectionSet2);
+            Console.WriteLine("Resultat: " + string.Join(",", intersectionResult));
+            Console.WriteLine();
+
+            // Unique
+            string[] uniqueTestData = { "a", "b", "c", "d", "a", "a", "c" };
+            Console.WriteLine("Demonstration av Unique:");
+            Console.WriteLine("Testdata: " + string.Join(",", uniqueTestData));
+            List<string> uniqueResult = Unique(uniqueTestData);
+            Console.WriteLine("Resultat: " + string.Join(",", uniqueResult));
+            Console.WriteLine();
         }
 
         public static int Sum(int[] numbers)
@@ -110,6 +127,9 @@
             int temp = numbers[index1];
             numbers[index1] = numbers[index2];
             numbers[index2] = temp;
+
+            // alternativ lösning med tuplar
+            // (numbers[index1], numbers[index2]) = (numbers[index2], numbers[index1]);
         }
 
         public static string[] Concatenate(string[] part1, string[] part2)
@@ -123,7 +143,7 @@
 
             for (int i = 0; i < part2.Length; i++)
             {
-                result[part1.Length + i] = part1[i];
+                result[part1.Length + i] = part2[i];
             }
 
             return result;
@@ -185,6 +205,43 @@
                     }
                 }
             }
+        }
+
+        public static List<string> Intersection(string[] set1, string[] set2)
+        {
+            List<string> result = new List<string>();
+            foreach (string s in set1)
+            {
+                if (Contains(set2, s))
+                {
+                    result.Add(s);
+                }
+            }
+            return result;
+        }
+
+        public static List<string> Unique(string[] strings)
+        {
+            List<string> result = new List<string>();
+
+            foreach (string s1 in strings)
+            {
+                int count = 0;
+                foreach (string s2 in strings)
+                {
+                    if (s1 == s2)
+                    {
+                        count++;
+                    }
+                }
+
+                if (count == 1)
+                {
+                    result.Add(s1);
+                }
+            }
+
+            return result;
         }
     }
 }
